@@ -1,17 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Square from '../../atoms/Square';
+import GameContext from "../../../context/GameContext/context";
 
 const Snake = () => {
-
-    const shape = [
-        {top: 240, left: 240},
-        {top: 240, left: 250},
-        {top: 240, left: 260}
-    ]
-
+    const { state } = useContext(GameContext);
+    
     return (
         <>
-            {shape.map(({top, left})=>(
+            {state.snake.map(({top, left})=>(
                 <Square style={{top, left}}/>
             ))}
         </>

@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import Square from '../../atoms/Square';
 
-const Fruit = ({top = '0px', left = '0px'}) => {
+import GameContext from "../../../context/GameContext/context";
+
+const Fruit = () => {
+
+    const { state } = useContext(GameContext);
+    const { top, left } = state.fruit;
+    
     return (
         <Square style={{top, left}} />
     )
