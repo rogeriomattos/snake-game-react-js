@@ -1,14 +1,11 @@
 import React, { createContext, useState } from "react";
-
-interface Position {
-    top: number;
-    left: number;
-}
+import IPosition from '../../helpers/contracts/IPosition';
+import getRandomPosition from "../../helpers/functions/getRandomPosition";
 
 //Tipando os dados que quero para usuário
 type GameType = {
-    fruit: Position;
-    snake: Position[];
+    fruit: IPosition;
+    snake: IPosition[];
     pontuation: number;
 };
 
@@ -22,7 +19,7 @@ type PropsGameContext = {
 //Valor default do contexto
 const DEFAULT_VALUE = {
   state: {
-    fruit: { top: 10, left: 0 },
+    fruit: getRandomPosition(),
     pontuation: 0,
     snake: [
         {top: 240, left: 240},
@@ -45,7 +42,11 @@ const GameContextProvider: React.FC = ({ children }) => {
   const [state, setState] = useState(DEFAULT_VALUE.state);
   
   const start = () => {
-    alert('new game');
+    console.log('new game');
+    setState({
+      ...state,
+      fruit: getRandomPosition(),
+    })
   };
 
   return (
