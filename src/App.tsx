@@ -1,11 +1,8 @@
 import React from 'react';
+import Game from './components/templates/Game';
 
 function App() {
-  return (
-    <div>
-      <h1>Snake Game</h1>
-    </div>
-  );
+  return (<Game/>);
 }
 
 export default App;
