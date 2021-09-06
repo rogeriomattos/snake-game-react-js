@@ -1,10 +1,11 @@
 import React from 'react';
 import Board from '../../organisms/Board';
 import Header from '../../organisms/Header';
+import { GameContainer } from './styles';
 
 const Game = () => {
     return (
-        <div
+        <GameContainer
             role="button"
             tabIndex={0}
             onKeyUp={()=>{
@@ -16,7 +17,7 @@ const Game = () => {
         >
             <Header/>
             <Board/>
-        </div>
+        </GameContainer>
     );
 };
 
