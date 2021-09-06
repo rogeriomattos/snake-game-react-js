@@ -1,5 +1,6 @@
 import React, { createContext, useState } from "react";
 import IPosition from '../../helpers/contracts/IPosition';
+import MoveDirectionType from "../../helpers/enum/MoveDirectionType";
 import getRandomPosition from "../../helpers/functions/getRandomPosition";
 
 //Tipando os dados que quero para usuário
@@ -7,6 +8,7 @@ type GameType = {
     fruit: IPosition;
     snake: IPosition[];
     pontuation: number;
+    moveDirection: MoveDirectionType;
 };
 
 //Tipando as Props do contexto
@@ -21,6 +23,7 @@ const DEFAULT_VALUE = {
   state: {
     fruit: getRandomPosition(),
     pontuation: 0,
+    moveDirection: MoveDirectionType.BOTTOM,
     snake: [
         {top: 240, left: 240},
         {top: 240, left: 250},
@@ -46,8 +49,48 @@ const GameContextProvider: React.FC = ({ children }) => {
     setState({
       ...state,
       fruit: getRandomPosition(),
-    })
+    });
+
+    setInterval(() => {
+      moveSnake();
+    }, 1000);
   };
+
+  const moveSnake = () => {
+
+    let newSnake = state.snake;
+    let squareSize = 10;
+
+
+    const currentSnakeHead = newSnake[newSnake.length - 1];
+    switch(state.moveDirection){
+      case MoveDirectionType.RIGHT: {
+        newSnake.shift();
+        newSnake.push({top: currentSnakeHead.top, left: currentSnakeHead.left + squareSize});
+        break;
+      }
+      case MoveDirectionType.LEFT: {
+        newSnake.shift();
+        newSnake.push({top: currentSnakeHead.top, left: currentSnakeHead.left - squareSize});
+        break;
+      }
+      case MoveDirectionType.TOP: {
+        newSnake.shift();
+        newSnake.push({top: currentSnakeHead.top - squareSize, left: currentSnakeHead.left});
+        break;
+      }
+      case MoveDirectionType.BOTTOM: {
+        newSnake.shift();
+        newSnake.push({top: currentSnakeHead.top + squareSize, left: currentSnakeHead.left});
+        break;
+      }
+    }
+
+    setState({
+      ...state,
+      snake: newSnake,
+    });
+  }
 
   return (
     <GameContext.Provider
