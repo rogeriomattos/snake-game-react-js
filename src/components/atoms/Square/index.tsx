@@ -2,7 +2,7 @@ import React from 'react';
 import { SquareDesign } from './styles';
 
 interface IProps {
-    style: React.CSSProperties;
+    style?: React.CSSProperties;
 }
 
 const Square: React.FC<IProps> = ({style}) => {
