@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import GameContext from "../../../context/GameContext/context";
 
-const StartButton =() => {
+const NewGameButton =() => {
     const { start } = useContext(GameContext);
 
-    return <button onClick={start}>Start</button>;
+    return <button onClick={start}>New Game</button>;
 };
 
-export default StartButton;
+export default NewGameButton;

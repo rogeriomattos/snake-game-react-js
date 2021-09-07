@@ -1,5 +1,5 @@
 import React from 'react';
-import StartButton from '../../atoms/StartButton';
+import NewGameButton from '../../atoms/NewGameButton';
 import PointScreen from '../../atoms/PointScreen';
 import { HeaderContainer } from './styles';
 
@@ -8,7 +8,7 @@ const Header: React.FC = () => {
         <HeaderContainer>
             <h1>Snake Game</h1>
             <div>
-                <StartButton/>
+                <NewGameButton/>
                 <PointScreen/>
             </div>
         </HeaderContainer>
