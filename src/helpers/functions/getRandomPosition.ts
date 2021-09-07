@@ -3,8 +3,13 @@ import IPosition from "../contracts/IPosition";
 const { width, height, squareArea } = GAME_SETTINGS.gameResolution;
 
 const getRandomPosition = ():IPosition => {
-    const left = getRandomInt(0, width/squareArea) * squareArea;
-    const top = getRandomInt(0, height/squareArea) * squareArea;
+    let left = getRandomInt(0, width/squareArea) * squareArea;
+    let top = getRandomInt(0, height/squareArea) * squareArea;
+    
+    if(left == width)
+        left = left - squareArea;
+    if(top == height)
+        top = top - squareArea;
     
     return { left, top};
 };
