@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 export const BoardContainer = styled.div`
-    /* width: 490px;
-    height: 490px; */
+    overflow: hidden;
     display: flex;
     position: relative;
 `;

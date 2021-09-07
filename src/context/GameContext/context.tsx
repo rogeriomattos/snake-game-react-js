@@ -50,13 +50,21 @@ const GameContextProvider: React.FC = ({ children }) => {
   const [isStart, setIsStart] = useState(false);
   const start = () => {
     console.log('new game');
-    
+    if(currentIntervalId != undefined)
+        clearInterval(currentIntervalId);
     setState({
       ...state,
       fruit: getRandomPosition(),
+      snake: createInitalSnake()
     });
     setIsStart(true);
   };
+
+  const gameOver = () => {
+    setIsStart(false);
+    if(currentIntervalId != undefined)
+        clearInterval(currentIntervalId);
+  }
 
   const moveSnake = () => {
     let newSnake = state.snake;
@@ -101,6 +109,22 @@ const GameContextProvider: React.FC = ({ children }) => {
     });
   }
 
+  const verifyColision = () => {
+    const currentSnakeHead = state.snake[state.snake.length - 1];
+    console.log('currentSnakeHead', currentSnakeHead);
+    const { width, height, squareArea } = GAME_SETTINGS.gameResolution;
+    if(currentSnakeHead){
+      if(currentSnakeHead.left < 0 || currentSnakeHead.left > width - squareArea){
+        console.log('bateu');
+        gameOver();
+      }
+      if(currentSnakeHead.top < 0 || currentSnakeHead.top > height - squareArea){
+        console.log('bateu');
+        gameOver();
+      }
+    }
+  };
+
   useEffect(()=>{
     if(isStart){
       if(currentIntervalId != undefined)
@@ -110,6 +134,10 @@ const GameContextProvider: React.FC = ({ children }) => {
       setCurrentIntervalId(intervalId);
     }
   }, [state.moveDirection, isStart]);
+
+  useEffect(() => {
+    verifyColision();
+  }, [JSON.stringify(state.snake)]);
 
   return (
     <GameContext.Provider
