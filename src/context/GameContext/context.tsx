@@ -110,6 +110,16 @@ const GameContextProvider: React.FC = ({ children }) => {
   }
 
   const changeDirection = (newDirection: MoveDirectionType) => {
+    
+    if(state.moveDirection == MoveDirectionType.RIGHT && newDirection == MoveDirectionType.LEFT)
+      return;
+    if(state.moveDirection == MoveDirectionType.LEFT && newDirection == MoveDirectionType.RIGHT)
+      return;
+    if(state.moveDirection == MoveDirectionType.TOP && newDirection == MoveDirectionType.BOTTOM)
+      return;
+    if(state.moveDirection == MoveDirectionType.BOTTOM && newDirection == MoveDirectionType.TOP)
+      return;
+      
     setState({
       ...state,
       moveDirection: newDirection,
