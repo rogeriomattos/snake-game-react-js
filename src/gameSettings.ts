@@ -5,9 +5,9 @@ const GAME_SETTINGS = {
         "squareArea": 10
     },
     "speed": {
-        "initial": 500,
-        "minSpeed": 100,
-        "speedDecay": 100 
+        "initial": 300,
+        "minSpeed": 50,
+        "speedDecay": 25 
     }
 };
 

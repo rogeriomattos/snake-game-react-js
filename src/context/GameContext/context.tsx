@@ -12,6 +12,7 @@ type GameType = {
     snake: IPosition[];
     pontuation: number;
     moveDirection: MoveDirectionType;
+    isGameOver: boolean;
 };
 
 //Tipando as Props do contexto
@@ -34,7 +35,8 @@ const DEFAULT_VALUE = {
   } as GameType,
   setState: () => {}, //função de inicialização
   start: () => {},
-  changeDirection: (newDirection: MoveDirectionType) => {}
+  changeDirection: (newDirection: MoveDirectionType) => {},
+  isGameOver: false
 };
 
 //criando nosso contexto GameContext
@@ -57,7 +59,8 @@ const GameContextProvider: React.FC = ({ children }) => {
       ...state,
       fruit: getRandomPosition(),
       snake: createInitalSnake(),
-      pontuation: 0
+      pontuation: 0,
+      isGameOver: false
     });
     setSpeedSeconds(GAME_SETTINGS.speed.initial);
     setIsStart(true);
@@ -65,6 +68,10 @@ const GameContextProvider: React.FC = ({ children }) => {
 
   const gameOver = () => {
     setIsStart(false);
+    setState({
+      ...state,
+      isGameOver: true
+    });
     if(currentIntervalId != undefined)
         clearInterval(currentIntervalId);
   }
