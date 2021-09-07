@@ -8,7 +8,7 @@ const Snake = () => {
     return (
         <>
             {state.snake.map(({top, left}, index)=>(
-                <Square key={'snake_'+index} style={{top, left}}/>
+                <Square key={'snake_'+index} style={{top, left, border:'1px solid #ddd'}}/>
             ))}
         </>
     );

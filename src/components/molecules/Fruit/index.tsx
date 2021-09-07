@@ -9,7 +9,7 @@ const Fruit = () => {
     const { top, left } = state.fruit;
     
     return (
-        <Square style={{top, left}} />
+        <Square style={{top, left, background: '#b12603eb'}} />
     )
 };
 
