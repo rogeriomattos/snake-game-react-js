@@ -111,7 +111,6 @@ const GameContextProvider: React.FC = ({ children }) => {
 
   const verifyColision = () => {
     const currentSnakeHead = state.snake[state.snake.length - 1];
-    console.log('currentSnakeHead', currentSnakeHead);
     const { width, height, squareArea } = GAME_SETTINGS.gameResolution;
     if(currentSnakeHead){
       if(currentSnakeHead.left < 0 || currentSnakeHead.left > width - squareArea){
@@ -125,6 +124,19 @@ const GameContextProvider: React.FC = ({ children }) => {
     }
   };
 
+  const verifyFruit = () => {
+    const currentSnakeHead = state.snake[state.snake.length - 1];
+    if(currentSnakeHead.top == state.fruit.top && currentSnakeHead.left == state.fruit.left)
+      toEatFruit();
+  }
+
+  const toEatFruit = () => {
+    setState({
+      ...state,
+      fruit: getRandomPosition(),
+    });
+  }
+
   useEffect(()=>{
     if(isStart){
       if(currentIntervalId != undefined)
@@ -133,10 +145,11 @@ const GameContextProvider: React.FC = ({ children }) => {
       const intervalId = setInterval(moveSnake, 1000);
       setCurrentIntervalId(intervalId);
     }
-  }, [state.moveDirection, isStart]);
+  }, [state.moveDirection, isStart, state.fruit]);
 
   useEffect(() => {
     verifyColision();
+    verifyFruit();
   }, [JSON.stringify(state.snake)]);
 
   return (
