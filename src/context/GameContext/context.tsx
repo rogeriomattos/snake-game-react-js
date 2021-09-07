@@ -48,6 +48,7 @@ const GameContextProvider: React.FC = ({ children }) => {
   const [state, setState] = useState(DEFAULT_VALUE.state);
   const [currentIntervalId, setCurrentIntervalId] = useState<NodeJS.Timeout>();
   const [isStart, setIsStart] = useState(false);
+  const [speedSeconds, setSpeedSeconds] = useState(GAME_SETTINGS.speed.initial);
   const start = () => {
     console.log('new game');
     if(currentIntervalId != undefined)
@@ -58,6 +59,7 @@ const GameContextProvider: React.FC = ({ children }) => {
       snake: createInitalSnake(),
       pontuation: 0
     });
+    setSpeedSeconds(GAME_SETTINGS.speed.initial);
     setIsStart(true);
   };
 
@@ -150,19 +152,25 @@ const GameContextProvider: React.FC = ({ children }) => {
 
   const toEatFruit = () => {
     moveSnake(false);
+    changeSpeed();
     setState({
       ...state,
       fruit: getRandomPosition(),
       pontuation: state.pontuation + 1
     });
   }
+  const changeSpeed = () => {
+    const { minSpeed, speedDecay } = GAME_SETTINGS.speed;
+    if(speedSeconds > minSpeed)
+      setSpeedSeconds(speedSeconds - speedDecay);
+  };
 
   useEffect(()=>{
     if(isStart){
       if(currentIntervalId != undefined)
         clearInterval(currentIntervalId);
       moveSnake();
-      const intervalId = setInterval(() => moveSnake(), 1000);
+      const intervalId = setInterval(() => moveSnake(), speedSeconds);
       setCurrentIntervalId(intervalId);
     }
   }, [state.moveDirection, isStart, state.fruit]);
