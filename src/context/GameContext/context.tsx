@@ -114,19 +114,32 @@ const GameContextProvider: React.FC = ({ children }) => {
     });
   }
 
-  const verifyColision = () => {
+  const checkSnakeCollidedWithItself = () => {
+    const currentSnakeHead = state.snake[state.snake.length - 1];
+    if(currentSnakeHead){
+      const { left, top } = currentSnakeHead;
+      if(state.snake.filter((item) => item.left == left && item.top == top).length > 1){
+        gameOver();
+      }
+    }
+  };
+
+  const checkSnakeCollidedWithBorders = () => {
     const currentSnakeHead = state.snake[state.snake.length - 1];
     const { width, height, squareArea } = GAME_SETTINGS.gameResolution;
     if(currentSnakeHead){
       if(currentSnakeHead.left < 0 || currentSnakeHead.left > width - squareArea){
-        console.log('bateu');
         gameOver();
       }
       if(currentSnakeHead.top < 0 || currentSnakeHead.top > height - squareArea){
-        console.log('bateu');
         gameOver();
       }
     }
+  };
+
+  const verifyColision = () => {
+    checkSnakeCollidedWithBorders();
+    checkSnakeCollidedWithItself();
   };
 
   const verifyFruit = () => {
