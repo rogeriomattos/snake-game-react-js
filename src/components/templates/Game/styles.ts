@@ -6,7 +6,6 @@ export const GameContainer = styled.div`
     align-items: center;
     justify-content: center;
     margin: 0 auto;
-    width: 490px;
     border: 1px solid #000;
 
     &:focus {

@@ -1,5 +1,6 @@
 import React, { createContext, useState } from "react";
 import { useEffect } from "react";
+import GAME_SETTINGS from "../../gameSettings";
 import IPosition from '../../helpers/contracts/IPosition';
 import MoveDirectionType from "../../helpers/enum/MoveDirectionType";
 import getRandomPosition from "../../helpers/functions/getRandomPosition";
@@ -20,17 +21,27 @@ type PropsGameContext = {
   changeDirection: (newDirection: MoveDirectionType) => void;
 };
 
+const createInitalSnake = () => {
+  const { height, width, squareArea } = GAME_SETTINGS.gameResolution;  
+  const top = Math.floor(Math.floor(height/squareArea)/2) * squareArea;
+  const left = Math.floor(Math.floor(width/squareArea)/2) * squareArea;
+
+  let snake: IPosition[] = [];
+
+  for(let i = 0; i < 3; i++){
+    snake.push({top, left: left + (squareArea * i)});
+  }
+
+  return snake;
+}
+
 //Valor default do contexto
 const DEFAULT_VALUE = {
   state: {
     fruit: getRandomPosition(),
     pontuation: 0,
     moveDirection: MoveDirectionType.BOTTOM,
-    snake: [
-        {top: 240, left: 240},
-        {top: 240, left: 250},
-        {top: 240, left: 260}
-    ]
+    snake: createInitalSnake()
   } as GameType,
   setState: () => {}, //função de inicialização
   start: () => {},
@@ -60,29 +71,29 @@ const GameContextProvider: React.FC = ({ children }) => {
 
   const moveSnake = () => {
     let newSnake = state.snake;
-    let squareSize = 10;
+    const { squareArea } = GAME_SETTINGS.gameResolution;
 
 
     const currentSnakeHead = newSnake[newSnake.length - 1];
     switch(state.moveDirection){
       case MoveDirectionType.RIGHT: {
         newSnake.shift();
-        newSnake.push({top: currentSnakeHead.top, left: currentSnakeHead.left + squareSize});
+        newSnake.push({top: currentSnakeHead.top, left: currentSnakeHead.left + squareArea});
         break;
       }
       case MoveDirectionType.LEFT: {
         newSnake.shift();
-        newSnake.push({top: currentSnakeHead.top, left: currentSnakeHead.left - squareSize});
+        newSnake.push({top: currentSnakeHead.top, left: currentSnakeHead.left - squareArea});
         break;
       }
       case MoveDirectionType.TOP: {
         newSnake.shift();
-        newSnake.push({top: currentSnakeHead.top - squareSize, left: currentSnakeHead.left});
+        newSnake.push({top: currentSnakeHead.top - squareArea, left: currentSnakeHead.left});
         break;
       }
       case MoveDirectionType.BOTTOM: {
         newSnake.shift();
-        newSnake.push({top: currentSnakeHead.top + squareSize, left: currentSnakeHead.left});
+        newSnake.push({top: currentSnakeHead.top + squareArea, left: currentSnakeHead.left});
         break;
       }
       

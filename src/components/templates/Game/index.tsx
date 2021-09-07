@@ -4,7 +4,8 @@ import Header from '../../organisms/Header';
 import { GameContainer } from './styles';
 import GameContext from "../../../context/GameContext/context";
 import MoveDirectionType from '../../../helpers/enum/MoveDirectionType';
-
+import GAME_SETTINGS from '../../../gameSettings';
+const { width, height } = GAME_SETTINGS.gameResolution;
 const Game = () => {
     const { changeDirection } = useContext(GameContext);
     
@@ -36,6 +37,7 @@ const Game = () => {
             tabIndex={0}
             onKeyUp={handleGame}
             onKeyDown={()=>{}}
+            style={{width}}
         >
             <Header/>
             <Board/>
