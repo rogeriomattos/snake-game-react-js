@@ -66,7 +66,7 @@ const GameContextProvider: React.FC = ({ children }) => {
         clearInterval(currentIntervalId);
   }
 
-  const moveSnake = () => {
+  const moveSnake = (removeLastNode = true) => {
     let newSnake = state.snake;
     const { squareArea } = GAME_SETTINGS.gameResolution;
 
@@ -74,22 +74,26 @@ const GameContextProvider: React.FC = ({ children }) => {
     const currentSnakeHead = newSnake[newSnake.length - 1];
     switch(state.moveDirection){
       case MoveDirectionType.RIGHT: {
-        newSnake.shift();
+        if(removeLastNode)
+          newSnake.shift();
         newSnake.push({top: currentSnakeHead.top, left: currentSnakeHead.left + squareArea});
         break;
       }
       case MoveDirectionType.LEFT: {
-        newSnake.shift();
+        if(removeLastNode)
+          newSnake.shift();
         newSnake.push({top: currentSnakeHead.top, left: currentSnakeHead.left - squareArea});
         break;
       }
       case MoveDirectionType.TOP: {
-        newSnake.shift();
+        if(removeLastNode)
+          newSnake.shift();
         newSnake.push({top: currentSnakeHead.top - squareArea, left: currentSnakeHead.left});
         break;
       }
       case MoveDirectionType.BOTTOM: {
-        newSnake.shift();
+        if(removeLastNode)
+          newSnake.shift();
         newSnake.push({top: currentSnakeHead.top + squareArea, left: currentSnakeHead.left});
         break;
       }
@@ -131,6 +135,7 @@ const GameContextProvider: React.FC = ({ children }) => {
   }
 
   const toEatFruit = () => {
+    moveSnake(false);
     setState({
       ...state,
       fruit: getRandomPosition(),
@@ -142,7 +147,7 @@ const GameContextProvider: React.FC = ({ children }) => {
       if(currentIntervalId != undefined)
         clearInterval(currentIntervalId);
       moveSnake();
-      const intervalId = setInterval(moveSnake, 1000);
+      const intervalId = setInterval(() => moveSnake(), 1000);
       setCurrentIntervalId(intervalId);
     }
   }, [state.moveDirection, isStart, state.fruit]);
