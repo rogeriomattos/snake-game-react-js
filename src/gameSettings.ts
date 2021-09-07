@@ -6,7 +6,7 @@ const GAME_SETTINGS = {
     },
     "speed": {
         "initial": 300,
-        "minSpeed": 50,
+        "minSpeed": 100,
         "speedDecay": 25 
     }
 };
