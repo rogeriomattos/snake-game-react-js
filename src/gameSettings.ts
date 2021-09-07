@@ -1,7 +1,7 @@
 const GAME_SETTINGS = {
     "gameResolution":{
         "width": 500,
-        "height": 500,
+        "height": 450,
         "squareArea": 12.5
     },
     "speed": {

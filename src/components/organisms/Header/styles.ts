@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const HeaderContainer = styled.div`
-    border-bottom: 1px solid #000;
+    border-bottom: 4px solid #000;
     width: 100%;
     padding: 20px;
     box-sizing: border-box;
