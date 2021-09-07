@@ -55,7 +55,8 @@ const GameContextProvider: React.FC = ({ children }) => {
     setState({
       ...state,
       fruit: getRandomPosition(),
-      snake: createInitalSnake()
+      snake: createInitalSnake(),
+      pontuation: 0
     });
     setIsStart(true);
   };
@@ -139,6 +140,7 @@ const GameContextProvider: React.FC = ({ children }) => {
     setState({
       ...state,
       fruit: getRandomPosition(),
+      pontuation: state.pontuation + 1
     });
   }
 
