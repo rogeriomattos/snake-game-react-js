@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import GAME_SETTINGS from "../../gameSettings";
 import IPosition from '../../helpers/contracts/IPosition';
 import MoveDirectionType from "../../helpers/enum/MoveDirectionType";
+import createInitalSnake from "../../helpers/functions/createInitalSnake";
 import getRandomPosition from "../../helpers/functions/getRandomPosition";
 
 //Tipando os dados que quero para usuário
@@ -21,26 +22,14 @@ type PropsGameContext = {
   changeDirection: (newDirection: MoveDirectionType) => void;
 };
 
-const createInitalSnake = () => {
-  const { height, width, squareArea } = GAME_SETTINGS.gameResolution;  
-  const top = Math.floor(Math.floor(height/squareArea)/2) * squareArea;
-  const left = Math.floor(Math.floor(width/squareArea)/2) * squareArea;
 
-  let snake: IPosition[] = [];
-
-  for(let i = 0; i < 3; i++){
-    snake.push({top, left: left + (squareArea * i)});
-  }
-
-  return snake;
-}
 
 //Valor default do contexto
 const DEFAULT_VALUE = {
   state: {
     fruit: getRandomPosition(),
     pontuation: 0,
-    moveDirection: MoveDirectionType.BOTTOM,
+    moveDirection: MoveDirectionType.RIGHT,
     snake: createInitalSnake()
   } as GameType,
   setState: () => {}, //função de inicialização
