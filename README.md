@@ -1,6 +1,6 @@
 <h1 align="center">:snake: Snake Game :video_game:</h1>
 <p align="center">Snake game built with Reactjs and using ContextAPI to share states</p>
-
+<p align="center"><a href="https://rogeriomattos.github.io/snake-game-react-js/" target="_blank">Test the game by clicking here!</a></p>
 <p align="center">
   <a href="#installation">Installation</a> •
 </p>
