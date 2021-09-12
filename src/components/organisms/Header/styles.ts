@@ -15,4 +15,19 @@ export const HeaderContainer = styled.div`
         display: flex;
         justify-content: space-between;
     }
+
+    @media (max-width:700px) {
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        h1 {
+            font-size: 1.2rem;
+        }
+        div{
+            justify-content: flex-end;
+        }
+
+    }
+
 `;

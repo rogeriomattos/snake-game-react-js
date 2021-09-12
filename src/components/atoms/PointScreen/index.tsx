@@ -1,13 +1,14 @@
 import React, { useContext } from 'react';
 import GameContext from "../../../context/GameContext/context";
+import { PointScreenContainer } from './styles';
 
 const PointScreen = () => {
     const { state } = useContext(GameContext);
 
     return (
-        <div>
-            Pontuation: {state.pontuation}
-        </div>
+        <PointScreenContainer>
+            Score: {state.pontuation}
+        </PointScreenContainer>
     )
 }
 

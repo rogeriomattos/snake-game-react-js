@@ -11,4 +11,9 @@ export const GameContainer = styled.div`
     &:focus {
         outline: none;
     }
+
+    @media (max-width:700px) {
+        margin-top: 4px;
+    }
+
 `;
