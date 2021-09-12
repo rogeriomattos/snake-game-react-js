@@ -6,6 +6,7 @@ import GameContext from "../../../context/GameContext/context";
 import MoveDirectionType from '../../../helpers/enum/MoveDirectionType';
 import GAME_SETTINGS from '../../../gameSettings';
 import GameOverDialog from '../../molecules/GameOverDialog';
+import MobileControls from '../../organisms/MobileControls';
 const { width, height } = GAME_SETTINGS.gameResolution;
 const Game = () => {
     const { changeDirection } = useContext(GameContext);
@@ -32,18 +33,21 @@ const Game = () => {
     };
 
     return (
-        <GameContainer
-            className="nes-container with-title"
-            role="button"
-            tabIndex={0}
-            onKeyUp={handleGame}
-            onKeyDown={()=>{}}
-            style={{width}}
-        >
-            <Header/>
-            <Board/>
-            <GameOverDialog/>
-        </GameContainer>
+        <>
+            <GameContainer
+                className="nes-container with-title"
+                role="button"
+                tabIndex={0}
+                onKeyUp={handleGame}
+                onKeyDown={()=>{}}
+                style={{width}}
+            >
+                <Header/>
+                <Board/>
+                <GameOverDialog/>
+            </GameContainer>
+            <MobileControls/>
+        </>
     );
 };
 

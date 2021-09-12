@@ -6,6 +6,5 @@ export const ButtonElement = styled.button`
         font-size: .8rem;
         border-width: 3px;
         padding: 4px 8px;
-        display: none;
     }
 `;

@@ -9,7 +9,7 @@ const GameOverDialog = () => {
         <dialog className="nes-dialog is-dark" id="dialog-dark" open={state.isGameOver}>
             <form style={{textAlign: 'center'}} method="dialog">
                 <p className="title">GAME OVER</p>
-                <p>Your pontuation: {state.pontuation}</p>
+                <p>Your score: {state.pontuation}</p>
                 
                 <NewGameButton/>
                 

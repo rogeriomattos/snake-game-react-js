@@ -26,6 +26,9 @@ export const HeaderContainer = styled.div`
         }
         div{
             justify-content: flex-end;
+            button {
+                display: none;
+            }
         }
 
     }
